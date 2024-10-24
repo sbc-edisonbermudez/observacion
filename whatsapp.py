@@ -57,7 +57,20 @@ menu = st.sidebar.selectbox(
 # Display the logo from a URL
 logo_url = "https://i1.sndcdn.com/avatars-TUVYyVNGNRk1TF07-p27gng-t500x500.jpg"
 st.image(logo_url, width=200)  # Adjust width as needed
-
+# Fetch data from the API
+data = requests.get("https://iph5309hnj.execute-api.us-east-1.amazonaws.com/dev/search-observations").json()
+st.title("Observaciones")
+# Extract only the "event" field from each notice
+events = [
+    {"event": notice["event"], "id": notice["id"], "observation": notice["observation"], "status": notice["status"]}
+    for notice in data["notices"]
+]
+# Convert the extracted events into a DataFrame
+df = pd.DataFrame(events)
+# Rename the "event" column to "aviso"
+df.rename(columns={"event": "Aviso","observation": "Observaciones",}, inplace=True)
+# Display the events in a table
+st.table(df)    
 
 
 # Definir el intervalo de recarga en segundos
@@ -66,30 +79,3 @@ reload_interval = 5  # Cambia este valor al número de segundos deseado
 # Inicializar el temporizador si no está en el estado de sesión
 if 'last_updated' not in st.session_state:
     st.session_state.last_updated = time.time()
-
-# Obtener datos de la API
-def fetch_data():
-    data = requests.get("https://iph5309hnj.execute-api.us-east-1.amazonaws.com/dev/search-observations").json()
-    events = [
-        {"event": notice["event"], "id": notice["id"], "observation": notice["observation"], "status": notice["status"]}
-        for notice in data["notices"]
-    ]
-    df = pd.DataFrame(events)
-    df.rename(columns={"event": "Aviso", "observation": "Observaciones"}, inplace=True)
-    return df
-
-# Verificar si ha pasado el intervalo de recarga
-elapsed_time = time.time() - st.session_state.last_updated
-if elapsed_time > reload_interval:
-    # Actualizar la tabla de datos
-    st.session_state.df = fetch_data()
-    st.session_state.last_updated = time.time()
-
-# Mostrar título y tabla
-st.title("Observaciones")
-if 'df' in st.session_state:
-    st.table(st.session_state.df)
-
-# Mostrar el tiempo restante hasta la próxima actualización
-remaining_time = reload_interval - (time.time() - st.session_state.last_updated)
-st.write(f"Actualizando en {int(remaining_time)} segundos...")
