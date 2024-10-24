@@ -1,9 +1,7 @@
 import requests
 import streamlit as st
 import pandas as pd
-import streamlit as st
 import time
-
 
 st.sidebar.image("https://liferaydev.subocol.com/image/layout_set_logo?img_id=190413&t=1729768369284", use_column_width=True)
 
@@ -14,7 +12,7 @@ st.markdown(
     .stSidebar {
         background-color: #0D4D64;
     }
-        .footer {
+    .footer {
         position: fixed;
         left: 0;
         bottom: 0;
@@ -54,25 +52,37 @@ menu = st.sidebar.selectbox(
     ("Inicio", "Observaciones", "Acerca de", "Contacto", "Ayuda")
 )
 
-# Display the logo from a URL
+# Mostrar el logo
 logo_url = "https://i1.sndcdn.com/avatars-TUVYyVNGNRk1TF07-p27gng-t500x500.jpg"
-st.image(logo_url, width=200)  # Adjust width as needed
+st.image(logo_url, width=200)
 
+# Cargar los datos inicialmente
+data = requests.get("https://iph5309hnj.execute-api.us-east-1.amazonaws.com/dev/search-observations").json()
+
+st.title("Observaciones")
+
+# Extraer solo los campos relevantes
+events = [
+    {"event": notice["event"], "id": notice["id"], "observation": notice["observation"], "status": notice["status"]}
+    for notice in data["notices"]
+]
+
+# Convertir los datos a un DataFrame
+df = pd.DataFrame(events)
+# Renombrar columnas
+df.rename(columns={"event": "Aviso", "observation": "Observaciones"}, inplace=True)
+
+# Mostrar la tabla inicialmente
+st.table(df)
+
+# Botón para recargar los datos
 if st.button("Recargar datos"):
-    # Fetch data from the API
+    # Volver a cargar los datos cuando se presione el botón
     data = requests.get("https://iph5309hnj.execute-api.us-east-1.amazonaws.com/dev/search-observations").json()
-    
-    st.title("Observaciones")
-    # Extract only the "event" field from each notice
     events = [
         {"event": notice["event"], "id": notice["id"], "observation": notice["observation"], "status": notice["status"]}
         for notice in data["notices"]
     ]
-    # Convert the extracted events into a DataFrame
     df = pd.DataFrame(events)
-    # Rename the "event" column to "aviso"
     df.rename(columns={"event": "Aviso", "observation": "Observaciones"}, inplace=True)
-    # Display the events in a table
     st.table(df)
-else:
-    st.write("Presiona el botón para recargar los datos.")
