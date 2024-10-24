@@ -49,35 +49,15 @@ st.markdown(
 
 menu = st.sidebar.selectbox(
     "",
-    ("Inicio", "Observaciones", "Acerca de", "Contacto", "Ayuda")
+    ("Observaciones", "Acerca de", "Contacto", "Ayuda")
 )
 
 # Mostrar el logo
 logo_url = "https://i1.sndcdn.com/avatars-TUVYyVNGNRk1TF07-p27gng-t500x500.jpg"
 st.image(logo_url, width=200)
 
-# Cargar los datos inicialmente
-data = requests.get("https://iph5309hnj.execute-api.us-east-1.amazonaws.com/dev/search-observations").json()
-
-st.title("Observaciones")
-
-# Extraer solo los campos relevantes
-events = [
-    {"event": notice["event"], "id": notice["id"], "observation": notice["observation"], "status": notice["status"]}
-    for notice in data["notices"]
-]
-
-# Convertir los datos a un DataFrame
-df = pd.DataFrame(events)
-# Renombrar columnas
-df.rename(columns={"event": "Aviso", "observation": "Observaciones"}, inplace=True)
-
-# Mostrar la tabla inicialmente
-st.table(df)
-
-# Botón para recargar los datos
-if st.button("Recargar datos"):
-    # Volver a cargar los datos cuando se presione el botón
+# Función para cargar los datos
+def load_data():
     data = requests.get("https://iph5309hnj.execute-api.us-east-1.amazonaws.com/dev/search-observations").json()
     events = [
         {"event": notice["event"], "id": notice["id"], "observation": notice["observation"], "status": notice["status"]}
@@ -85,4 +65,24 @@ if st.button("Recargar datos"):
     ]
     df = pd.DataFrame(events)
     df.rename(columns={"event": "Aviso", "observation": "Observaciones"}, inplace=True)
-    st.table(df)
+    return df
+
+# Estado para controlar si se han cargado los datos
+if 'data_loaded' not in st.session_state:
+    st.session_state['data_loaded'] = False
+
+# Cargar los datos iniciales
+if not st.session_state['data_loaded']:
+    df = load_data()
+    st.session_state['data_loaded'] = True
+    st.session_state['df'] = df
+
+# Mostrar la tabla inicialmente
+st.title("Observaciones")
+st.table(st.session_state['df'])
+
+# Botón para recargar los datos
+if st.button("Recargar datos"):
+    df = load_data()  # Recargar los datos
+    st.session_state['df'] = df  # Actualizar el estado
+    st.table(st.session_state['df'])  # Mostrar la nueva tabla
