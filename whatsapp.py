@@ -59,6 +59,7 @@ def load_data():
     st.dataframe(df)
     st.dataframe(df.style.hide(axis="index"))
     st.markdown(df.style.hide(axis="index").to_html(), unsafe_allow_html=True)
+    st.components.v1.html(itables.to_html_datatable(df), height=400)
 
     return df
 
