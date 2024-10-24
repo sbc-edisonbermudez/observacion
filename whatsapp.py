@@ -44,7 +44,7 @@ st.markdown(
 
 menu = st.sidebar.selectbox(
     "",
-    ("Observaciones", "Acerca de", "Contacto", "Ayuda")
+    ("Seguimiento", "Acerca de", "Contacto", "Ayuda")
 )
 
 
@@ -71,7 +71,7 @@ def load_data():
 if 'df' not in st.session_state:
     st.session_state['df'] = load_data()  # Cargar datos al iniciar la aplicación
     
-st.title("Observaciones")
+st.title("Seguimiento a la reparación")
 num_columns = len(st.session_state['df'].columns)-1
 st.html(f"""
 <p>
@@ -98,7 +98,6 @@ st.html(f"""
 </p>
 """)
 
-st.session_state['df'].index.name = 'Index_Name'
 st.table(st.session_state['df'])  # Mostrar la tabla
 
 # Botón para recargar los datos
