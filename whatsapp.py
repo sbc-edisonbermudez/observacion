@@ -56,7 +56,7 @@ def load_data():
 
     # Reordenar las columnas según el nuevo nombre
     df = df.reindex(columns=["Placa", "Aviso", "Estado", "Fecha", "Nota"]) 
-    
+    df.set_index("Placa")
     return df
 
 # Cargar los datos iniciales
