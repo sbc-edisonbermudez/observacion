@@ -30,7 +30,7 @@ st.markdown(
         color: #647281
     }
     
-    .stTable th{
+    .stTable tr td:first-child {
     border-left: 9px solid #90f0b6;
     border-radius: 8px;
     }
