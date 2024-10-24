@@ -67,6 +67,11 @@ st.table(df)
 
 st.title("")
 
-if st.session_state.run_timer:
-    time.sleep(5)  # Pausar por 60 segundos
-    st.experimental_rerun()  # Forzar recarga
+# Verificar si el script ya ha corrido antes de intentar la recarga
+if not st.session_state.has_run:
+    # Primera vez que se corre el script
+    st.session_state.has_run = True
+else:
+    # Si ya ha corrido, hacer la recarga
+    time.sleep(60)  # Pausa de 60 segundos
+    st.experimental_rerun()  # Forzar la recarga de la app
