@@ -44,7 +44,7 @@ st.image(logo_url, width=200)
 def load_data():
     data = requests.get("https://iph5309hnj.execute-api.us-east-1.amazonaws.com/dev/search-observations").json()
     events = [
-        {"event": notice["event"], "id": notice["id"], "observation": notice["observation"], "status": notice["status"]}
+        {"event": notice["event"], "id": notice["id"], "observation": notice["observation"], "status": notice["status"], "date": notice["date"], "plate" : notice["plate"]}
         for notice in data["notices"]
     ]
     df = pd.DataFrame(events)
