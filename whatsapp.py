@@ -81,3 +81,8 @@ df.rename(columns={"event": "Aviso","observation": "Observaciones",}, inplace=Tr
 # Display the events in a table
 st.table(df)
 
+
+# Verificar si han pasado 60 segundos desde la última recarga
+if time.time() - st.session_state.last_ran > 5:
+    st.session_state.last_ran = time.time()  # Actualizar el tiempo de última ejecución
+    st.experimental_rerun()  # Recargar la página
