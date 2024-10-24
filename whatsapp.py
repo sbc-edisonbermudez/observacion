@@ -69,7 +69,7 @@ st.title("Observaciones")
 st.html(
     "<p><span style=''>Taller: TODON AUTOS</span>!</p>"
 )
-st.table(st.session_state['df'], hide_index = True )  # Mostrar la tabla
+st.table(st.session_state['df'])  # Mostrar la tabla
 
 # Botón para recargar los datos
 if st.button("Recargar datos"):
