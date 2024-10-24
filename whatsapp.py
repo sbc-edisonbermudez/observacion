@@ -76,19 +76,11 @@ df.rename(columns={"event": "Aviso","observation": "Observaciones",}, inplace=Tr
 st.table(df)    
 
 
+st.set_page_config()
 
-# Inicializar el tiempo de inicio en el estado de sesión
-if 'start_time' not in st.session_state:
-    st.session_state.start_time = time.time()
-
-# Calcular el tiempo transcurrido
-elapsed_time = time.time() - st.session_state.start_time
-
-# Verificar si han pasado más de 5 segundos
-if elapsed_time > 5:
-    st.session_state.start_time = time.time()  # Reiniciar el temporizador
-    st.rerun()  # Recargar la página
-
-# Mostrar contenido en la aplicación
-st.title("Recarga automática cada 5 segundos")
-st.write(f"Tiempo transcurrido: {int(elapsed_time)} segundos")
+ph = st.empty()
+N = 5*60
+for secs in range(N,0,-1):
+    mm, ss = secs//60, secs%60
+    ph.metric("Countdown", f"{mm:02d}:{ss:02d}")
+    time.sleep(1)
