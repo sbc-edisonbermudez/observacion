@@ -12,6 +12,7 @@ st.markdown(
     .stSidebar {
         background-color: #0D4D64;
     }
+    
     .footer {
         position: fixed;
         left: 0;
@@ -22,6 +23,16 @@ st.markdown(
         margin: 30px auto;
         font-family: 'Montserrat', system-ui !important;
         font-size: 13px !important;
+    }    
+    .stTable  {
+        font-size: 13px;
+        font-weight: 400;
+        color: #647281
+    }
+    
+    .stTable th{
+    border-left: 9px solid #90f0b6;
+    border-radius: 8px;
     }
     </style>
     <div class="footer">
