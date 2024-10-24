@@ -8,8 +8,7 @@ def add_bg_from_local():
         f"""
         <style>
         .stApp {{
-            background-image: url("https://www.imghippo.com/i/Ro2lJ1729256143.jpg");
-            background-size: cover;
+            background-color:powderblue;
         }}
         </style>
         """,
