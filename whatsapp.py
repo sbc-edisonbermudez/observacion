@@ -48,7 +48,7 @@ def load_data():
         for notice in data["notices"]
     ]
     df = pd.DataFrame(events)
-    df.rename(columns={"event": "Aviso", "observation": "Observaciones"}, inplace=True)
+    df.rename(columns={"event": "Placa", "observation": "Notas"}, inplace=True)
     return df
 
 # Cargar los datos iniciales
@@ -63,3 +63,5 @@ st.table(st.session_state['df'])  # Mostrar la tabla
 if st.button("Recargar datos"):
     st.session_state['df'] = load_data()  # Recargar los datos
     st.rerun()  # Mostrar la nueva tabla
+    
+st.write("URL:", st.secrets["url_observations"])
