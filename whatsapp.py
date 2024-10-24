@@ -89,7 +89,7 @@ st.html(f"""
     </span>
 </p>
 """)
-st.table(st.session_state['df'].set_index("Placa"))  # Mostrar la tabla
+st.table(st.session_state['df'], hide_index = True)  # Mostrar la tabla
 
 
 
