@@ -6,7 +6,17 @@ import streamlit as st
 
 st.sidebar.image("https://i1.sndcdn.com/avatars-TUVYyVNGNRk1TF07-p27gng-t500x500.jpg", use_column_width=True)
 
-
+st.markdown(
+    """
+    <style>
+    /* Cambiar color de fondo */
+    .stSidebar {
+        background-color: pink;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 
 # Display the logo from a URL
 logo_url = "https://i1.sndcdn.com/avatars-TUVYyVNGNRk1TF07-p27gng-t500x500.jpg"
