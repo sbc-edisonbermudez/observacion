@@ -13,8 +13,6 @@ st.markdown(
     .stSidebar {
         background-color: #0D4D64;
     }
-    </style>
-    
         .footer {
         position: fixed;
         left: 0;
