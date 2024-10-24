@@ -56,7 +56,10 @@ def load_data():
 
     # Reordenar las columnas según el nuevo nombre
     df = df.reindex(columns=["Placa", "Aviso", "Estado", "Fecha", "Nota"])
-    df.hide_index = True
+    df.style.set_table_styles([{
+        'selector': 'th:nth-child(1), td:nth-child(1)',  # Ocultar la primera columna
+        'props': [('display', 'none')]
+    }])
     return df
 
 # Cargar los datos iniciales
