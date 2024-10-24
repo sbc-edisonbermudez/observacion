@@ -31,22 +31,6 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# Insertar JavaScript para recargar la página cada 60 segundos
-st.markdown(
-    """
-    <script>
-    function reloadPage() {
-        setTimeout(function() {
-            window.location.reload();
-            console.log("Ping")
-        }, 5000); // 5000 ms = 5 segundos
-    }
-    reloadPage();
-    </script>
-    """,
-    unsafe_allow_html=True
-)
-
 menu = st.sidebar.selectbox(
     "",
     ("Observaciones", "Acerca de", "Contacto", "Ayuda")
@@ -67,22 +51,15 @@ def load_data():
     df.rename(columns={"event": "Aviso", "observation": "Observaciones"}, inplace=True)
     return df
 
-# Estado para controlar si se han cargado los datos
-if 'data_loaded' not in st.session_state:
-    st.session_state['data_loaded'] = False
-
 # Cargar los datos iniciales
-if not st.session_state['data_loaded']:
-    df = load_data()
-    st.session_state['data_loaded'] = True
-    st.session_state['df'] = df
+if 'df' not in st.session_state:
+    st.session_state['df'] = load_data()  # Cargar datos al iniciar la aplicación
 
 # Mostrar la tabla inicialmente
 st.title("Observaciones")
-st.table(st.session_state['df'])
+st.table(st.session_state['df'])  # Mostrar la tabla
 
 # Botón para recargar los datos
 if st.button("Recargar datos"):
-    df = load_data()  # Recargar los datos
-    st.session_state['df'] = df  # Actualizar el estado
+    st.session_state['df'] = load_data()  # Recargar los datos
     st.table(st.session_state['df'])  # Mostrar la nueva tabla
