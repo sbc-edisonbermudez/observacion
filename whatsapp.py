@@ -62,8 +62,8 @@ def load_data():
 # Cargar los datos iniciales
 if 'df' not in st.session_state:
     st.session_state['df'] = load_data()  # Cargar datos al iniciar la aplicación
-st.title("Observaciones")
-st.table(st.session_state['df'])  # Mostrar la tabla
+    st.title("Observaciones")
+    st.table(st.session_state['df'])  # Mostrar la tabla
 
 # Botón para recargar los datos
 if st.button("Recargar datos"):
