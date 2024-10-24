@@ -8,12 +8,8 @@ st.markdown(
     """
     <style>
     /* Cambiar color de fondo */
-    .main {
+    .stSidebar  {
         background-color: #f0f2f6;
-    }
-    /* Cambiar color de fondo de la barra lateral */
-    .css-1d391kg {
-        background-color: #f4f4f4;
     }
     </style>
     """,
