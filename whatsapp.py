@@ -90,10 +90,9 @@ st.markdown(
 
             var x = window.setInterval(function() {
                 var timeLeft = Math.floor((end - Date.now()) / 1000);
-
+                console.log("test")
                 if(timeLeft < 0) { clearInterval(x); return; }
 
-                $('#div').html('00:' + (timeLeft < 10 ? '0' + timeLeft : timeLeft));
             },200);
         }
 
