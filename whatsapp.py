@@ -65,7 +65,9 @@ if 'df' not in st.session_state:
     st.session_state['df'] = load_data()  # Cargar datos al iniciar la aplicación
 
 
+
 st.title("Observaciones")
+st.title("Taller: TODON AUTOS")
 st.table(st.session_state['df'])  # Mostrar la tabla
 
 # Botón para recargar los datos
