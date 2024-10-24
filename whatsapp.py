@@ -11,7 +11,7 @@ st.markdown(
     <style>
     /* Cambiar color de fondo */
     .stSidebar {
-        background-color: pink;
+        background-color: #0D4D64;
     }
     </style>
     """,
