@@ -3,19 +3,20 @@ import streamlit as st
 import pandas as pd
 import streamlit as st
 
-page_bg_img = '''
-    <style>
-    .reportview-container {
-        background: url("Orbikabackground.PNG")
-    }
-   .sidebar .sidebar-content {
-        background: url("Orbikabackground.PNG")
-    }
-    </style>
-'''
+def add_bg_from_local():
+    st.markdown(
+        f"""
+        <style>
+        .stApp {{
+            background-image: url("https://www.imghippo.com/i/Ro2lJ1729256143.jpg");
+            background-size: cover;
+        }}
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
 
-
-st.markdown(page_bg_img, unsafe_allow_html=True)
+add_bg_from_local()
 
 
 
