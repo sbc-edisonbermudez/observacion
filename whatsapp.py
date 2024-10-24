@@ -74,6 +74,8 @@ st.html(
     "<p><span style=''>Taller: TODON AUTOS</span>!</p>"
 )
 st.table(st.session_state['df'])  # Mostrar la tabla
+num_columns = len(st.session_state['df'].columns)
+st.write(f"El número de columnas es: {num_columns-1}")  
 
 # Botón para recargar los datos
 if st.button("Recargar datos"):
