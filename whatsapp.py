@@ -67,12 +67,20 @@ if 'df' not in st.session_state:
 
 
 st.title("Observaciones")
-st.html(
-    "<p><span style=''>Taller: TODON AUTOS</span>!</p>"
-)
-st.table(st.session_state['df'])  # Mostrar la tabla
-num_columns = len(st.session_state['df'].columns)-1
-
+st.html(f"""
+<p>
+    <span style='font-family: "Roboto"; font-size: 20px; color: #025a7a; font-weight: 500;'>
+        Taller: 
+    </span>
+    <span style='font-family: "font-family: 'Roboto';
+    font-size: 17px;
+    font-weight: 500;
+    color: #1e80a2;
+        '>
+        TOBON AUTOS
+    </span>
+</p>
+""")
 st.html(f"""
 <p>
     <span style='font-family: "Roboto"; font-size: 20px; color: #025a7a; font-weight: 500;'>
@@ -83,6 +91,11 @@ st.html(f"""
     </span>
 </p>
 """)
+
+st.table(st.session_state['df'])  # Mostrar la tabla
+num_columns = len(st.session_state['df'].columns)-1
+
+
 
 
 
