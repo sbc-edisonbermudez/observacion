@@ -29,7 +29,7 @@ st.image(logo_url, width=200)  # Adjust width as needed
 data = requests.get("https://iph5309hnj.execute-api.us-east-1.amazonaws.com/dev/search-observations").json()
 
 
-st.title("Observaciones")
+st.title("Observaciones!")
 
 # Extract only the "event" field from each notice
 events = [
