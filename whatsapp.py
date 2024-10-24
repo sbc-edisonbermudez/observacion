@@ -75,10 +75,10 @@ num_columns = len(st.session_state['df'].columns)-1
 
 st.html(f"""
 <p>
-    <span style='font-family: "Roboto"; font-size: 14px; color: #025a7a; font-weight: 500;'>
+    <span style='font-family: "Roboto"; font-size: 20px; color: #025a7a; font-weight: 500;'>
         Total Avisos: 
     </span>
-    <span style='border-radius: 13px; height: 27px; width: auto; background-color: #ffb92b; color: #FFF; font-size: 16px; font-weight: 700;'>
+    <span style='font-size: 20px; border-radius: 13px; height: 27px; width: auto; background-color: #ffb92b; color: #FFF; font-size: 16px; font-weight: 700;padding:5px'>
         {num_columns}
     </span>
 </p>
