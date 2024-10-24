@@ -67,7 +67,7 @@ if 'df' not in st.session_state:
     st.session_state['df'] = load_data()  # Cargar datos al iniciar la aplicación
     
 
-conteo_placas = df['Placa'].value_counts()
+conteo_placas = session_state['df'].value_counts()
 st.html(
     "<p><span style=''>"+conteo_placas+"</span>!</p>"
 )
