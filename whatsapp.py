@@ -2,7 +2,6 @@ import requests
 import streamlit as st
 import pandas as pd
 import time
-import itables
 
 st.sidebar.image("https://liferaydev.subocol.com/image/layout_set_logo?img_id=190413&t=1729768369284", use_column_width=True)
 
@@ -57,15 +56,15 @@ def load_data():
 
     # Reordenar las columnas según el nuevo nombre
     df = df.reindex(columns=["Placa", "Aviso", "Estado", "Fecha", "Nota"])
-    st.components.v1.html(itables.to_html_datatable(df), height=400)
+    df.style.hide(axis="index").hide(axis="columns")
 
     return df
 
 # Cargar los datos iniciales
 if 'df' not in st.session_state:
     st.session_state['df'] = load_data()  # Cargar datos al iniciar la aplicación
-    st.title("Observaciones")
-    st.table(st.session_state['df'])  # Mostrar la tabla
+st.title("Observaciones")
+st.table(st.session_state['df'])  # Mostrar la tabla
 
 # Botón para recargar los datos
 if st.button("Recargar datos"):
