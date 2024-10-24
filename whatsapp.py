@@ -4,8 +4,6 @@ import pandas as pd
 import streamlit as st
 import time
 
-if 'start_time' not in st.session_state:
-    st.session_state.start_time = time.time()
 
 st.sidebar.image("https://liferaydev.subocol.com/image/layout_set_logo?img_id=190413&t=1729768369284", use_column_width=True)
 
@@ -61,26 +59,36 @@ logo_url = "https://i1.sndcdn.com/avatars-TUVYyVNGNRk1TF07-p27gng-t500x500.jpg"
 st.image(logo_url, width=200)  # Adjust width as needed
 
 
+st.session_state.start_time = time.time()  # Reiniciar el temporizador
+# Fetch data from the API
+data = requests.get("https://iph5309hnj.execute-api.us-east-1.amazonaws.com/dev/search-observations").json()
+st.title("Observaciones")
+# Extract only the "event" field from each notice
+events = [
+    {"event": notice["event"], "id": notice["id"], "observation": notice["observation"], "status": notice["status"]}
+    for notice in data["notices"]
+]
+# Convert the extracted events into a DataFrame
+df = pd.DataFrame(events)
+# Rename the "event" column to "aviso"
+df.rename(columns={"event": "Aviso","observation": "Observaciones",}, inplace=True)
+# Display the events in a table
+st.table(df)    
+
+
+
+# Inicializar el tiempo de inicio en el estado de sesión
+if 'start_time' not in st.session_state:
+    st.session_state.start_time = time.time()
+
+# Calcular el tiempo transcurrido
 elapsed_time = time.time() - st.session_state.start_time
 
-
-if elapsed_time > 3:
+# Verificar si han pasado más de 5 segundos
+if elapsed_time > 5:
     st.session_state.start_time = time.time()  # Reiniciar el temporizador
-    # Fetch data from the API
-    data = requests.get("https://iph5309hnj.execute-api.us-east-1.amazonaws.com/dev/search-observations").json()
-    st.title("Observaciones")
-    # Extract only the "event" field from each notice
-    events = [
-        {"event": notice["event"], "id": notice["id"], "observation": notice["observation"], "status": notice["status"]}
-        for notice in data["notices"]
-    ]
-    # Convert the extracted events into a DataFrame
-    df = pd.DataFrame(events)
-    # Rename the "event" column to "aviso"
-    df.rename(columns={"event": "Aviso","observation": "Observaciones",}, inplace=True)
-    # Display the events in a table
-    st.table(df)    
-else:
-    # Si no han pasado 3 segundos, mostrar el tiempo restante
-    remaining_time = 3 - int(elapsed_time)
-    st.write(f"Tiempo restante para la próxima recarga: {remaining_time} segundos")
+    st.rerun()  # Recargar la página
+
+# Mostrar contenido en la aplicación
+st.title("Recarga automática cada 5 segundos")
+st.write(f"Tiempo transcurrido: {int(elapsed_time)} segundos")
