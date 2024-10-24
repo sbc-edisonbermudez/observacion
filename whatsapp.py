@@ -64,27 +64,26 @@ st.image(logo_url, width=200)  # Adjust width as needed
 df.rename(columns={"event": "Aviso","observation": "Observaciones",}, inplace=True)
 
 
+# Observaciones
+st.title("Observaciones")
+elapsed_time = time.time() - st.session_state.start_time
+# Fetch data from the API
+data = requests.get("https://iph5309hnj.execute-api.us-east-1.amazonaws.com/dev/search-observations").json()
+# Extract only the "event" field from each notice
+events = [
+    {"event": notice["event"], "id": notice["id"], "observation": notice["observation"], "status": notice["status"]}
+    for notice in data["notices"]
+]
+# Display the events in a table
+st.table(df)
+# Convert the extracted events into a DataFrame
+df = pd.DataFrame(events)
+# Observaciones fin
+
 
 
 if elapsed_time > 3:
     st.session_state.start_time = time.time()  # Reiniciar el temporizador
-    # Observaciones
-    st.title("Observaciones")
-    elapsed_time = time.time() - st.session_state.start_time
-    # Fetch data from the API
-    data = requests.get("https://iph5309hnj.execute-api.us-east-1.amazonaws.com/dev/search-observations").json()
-    # Extract only the "event" field from each notice
-    events = [
-        {"event": notice["event"], "id": notice["id"], "observation": notice["observation"], "status": notice["status"]}
-        for notice in data["notices"]
-    ]
-    # Display the events in a table
-    st.table(df)
-    # Convert the extracted events into a DataFrame
-    df = pd.DataFrame(events)
-    # Observaciones fin
-    
-    
 else:
     # Si no han pasado 3 segundos, mostrar el tiempo restante
     remaining_time = 3 - int(elapsed_time)
