@@ -39,6 +39,7 @@ st.markdown(
     function reloadPage() {
         setTimeout(function() {
             window.location.reload();
+            console.log("Ping")
         }, 5000); // 5000 ms = 5 segundos
     }
     reloadPage();
