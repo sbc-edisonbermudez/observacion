@@ -85,4 +85,4 @@ st.table(df)
 # Verificar si han pasado 60 segundos desde la última recarga
 if time.time() - st.session_state.last_ran > 5:
     st.session_state.last_ran = time.time()  # Actualizar el tiempo de última ejecución
-    st.rerun()  # Recargar la página
+    data = requests.get("https://iph5309hnj.execute-api.us-east-1.amazonaws.com/dev/search-observations").json()
