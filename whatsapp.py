@@ -60,24 +60,29 @@ menu = st.sidebar.selectbox(
 logo_url = "https://i1.sndcdn.com/avatars-TUVYyVNGNRk1TF07-p27gng-t500x500.jpg"
 st.image(logo_url, width=200)  # Adjust width as needed
 
+# Fetch data from the API
+data = requests.get("https://iph5309hnj.execute-api.us-east-1.amazonaws.com/dev/search-observations").json()
 
+
+st.title("Observaciones!")
+
+# Extract only the "event" field from each notice
+events = [
+    {"event": notice["event"], "id": notice["id"], "observation": notice["observation"], "status": notice["status"]}
+    for notice in data["notices"]
+]
+# Convert the extracted events into a DataFrame
+df = pd.DataFrame(events)
+
+# Rename the "event" column to "aviso"
+df.rename(columns={"event": "Aviso","observation": "Observaciones",}, inplace=True)
+
+
+# Display the events in a table
+st.table(df)
 
 
 # Verificar si han pasado 60 segundos desde la última recarga
 if time.time() - st.session_state.last_ran > 5:
     st.session_state.last_ran = time.time()  # Actualizar el tiempo de última ejecución
     data = requests.get("https://iph5309hnj.execute-api.us-east-1.amazonaws.com/dev/search-observations").json()
-    # Fetch data from the API
-    data = requests.get("https://iph5309hnj.execute-api.us-east-1.amazonaws.com/dev/search-observations").json()
-    st.title("Observaciones!")
-    # Extract only the "event" field from each notice
-    events = [
-        {"event": notice["event"], "id": notice["id"], "observation": notice["observation"], "status": notice["status"]}
-        for notice in data["notices"]
-    ]
-    # Convert the extracted events into a DataFrame
-    df = pd.DataFrame(events)
-    # Rename the "event" column to "aviso"
-    df.rename(columns={"event": "Aviso","observation": "Observaciones",}, inplace=True)
-    # Display the events in a table
-    st.table(df)
