@@ -2,6 +2,7 @@ import requests
 import streamlit as st
 import pandas as pd
 import time
+import itables
 
 st.sidebar.image("https://liferaydev.subocol.com/image/layout_set_logo?img_id=190413&t=1729768369284", use_column_width=True)
 
