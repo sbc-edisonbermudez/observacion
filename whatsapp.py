@@ -61,6 +61,7 @@ logo_url = "https://i1.sndcdn.com/avatars-TUVYyVNGNRk1TF07-p27gng-t500x500.jpg"
 st.image(logo_url, width=200)  # Adjust width as needed
 
 
+elapsed_time = time.time() - st.session_state.start_time
 
 
 if elapsed_time > 3:
