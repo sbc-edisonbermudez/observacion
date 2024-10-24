@@ -9,6 +9,8 @@ def add_bg_from_local():
         <style>
         .stApp {{
             background-color:powderblue;
+             background-image: url("./Orbikabackground.PNG");
+            background-size: cover;
         }}
         </style>
         """,
