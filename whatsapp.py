@@ -91,7 +91,7 @@ st.html(f"""
     </span>
 </p>
 """)
-st.table(st.session_state['df'], hide_index = True)  # Mostrar la tabla
+st.table(st.session_state['df'])  # Mostrar la tabla
 
 
 
