@@ -67,7 +67,7 @@ if 'df' not in st.session_state:
 
 st.title("Observaciones")
 st.html(
-    "<p><span style='text-decoration: line-through double red;'>Taller: TODON AUTOS</span>!</p>"
+    "<p><span style=''>Taller: TODON AUTOS</span>!</p>"
 )
 st.table(st.session_state['df'], hide_index = True )  # Mostrar la tabla
 
