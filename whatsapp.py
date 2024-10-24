@@ -64,4 +64,4 @@ if st.button("Recargar datos"):
     st.session_state['df'] = load_data()  # Recargar los datos
     st.rerun()  # Mostrar la nueva tabla
     
-st.write("URL:", st.secrets["url_observations"])
+st.write("URL:", st.secrets.url_observations)
