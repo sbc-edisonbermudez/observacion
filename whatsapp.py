@@ -3,8 +3,7 @@ import streamlit as st
 import pandas as pd
 import streamlit as st
 
-st.markdown(
-    """
+page_bg_img = '''
     <style>
     .reportview-container {
         background: url("Orbikabackground.PNG")
@@ -13,9 +12,12 @@ st.markdown(
         background: url("Orbikabackground.PNG")
     }
     </style>
-    """,
-    unsafe_allow_html=True
-)
+'''
+
+
+st.markdown(page_bg_img, unsafe_allow_html=True)
+
+
 
 
 # Display the logo from a URL
