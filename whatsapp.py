@@ -54,6 +54,10 @@ menu = st.sidebar.selectbox(
     ("Inicio", "Observaciones", "Acerca de", "Contacto", "Ayuda")
 )
 
+# Display the logo from a URL
+logo_url = "https://i1.sndcdn.com/avatars-TUVYyVNGNRk1TF07-p27gng-t500x500.jpg"
+st.image(logo_url, width=200)  # Adjust width as needed
+
 if st.button("Recargar datos"):
     # Fetch data from the API
     data = requests.get("https://iph5309hnj.execute-api.us-east-1.amazonaws.com/dev/search-observations").json()
