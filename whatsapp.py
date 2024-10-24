@@ -72,9 +72,9 @@ st.html(
 )
 st.table(st.session_state['df'])  # Mostrar la tabla
 num_columns = len(st.session_state['df'].columns)-1
-st.html(
-    "<p><span style=''>"+num_columns+"</span>!</p>"
-)
+
+st.html(f"<p><span style=''>{num_columns}</span>!</p>")
+
 
 # Botón para recargar los datos
 if st.button("Recargar datos"):
