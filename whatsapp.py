@@ -56,8 +56,6 @@ def load_data():
 
     # Reordenar las columnas según el nuevo nombre
     df = df.reindex(columns=["Placa", "Aviso", "Estado", "Fecha", "Nota"]) 
-    df.set_index("Placa")
-    df.index.name = 'Index_Name'
 
     return df
 
@@ -91,13 +89,9 @@ st.html(f"""
     </span>
 </p>
 """)
-st.table(st.session_state['df'])  # Mostrar la tabla
 
-
-
-
-
-
+st.session_state['df'].index.name = 'Index_Name'
+st.table(st.session_state['df'].style.hide(axis="index"))  # Mostrar la tabla
 
 # Botón para recargar los datos
 if st.button("Recargar datos"):
