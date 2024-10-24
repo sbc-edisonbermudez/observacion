@@ -62,4 +62,4 @@ st.table(st.session_state['df'])  # Mostrar la tabla
 # Botón para recargar los datos
 if st.button("Recargar datos"):
     st.session_state['df'] = load_data()  # Recargar los datos
-    st.table(st.session_state['df'])  # Mostrar la nueva tabla
+    st.rerun(st.session_state['df'])  # Mostrar la nueva tabla
