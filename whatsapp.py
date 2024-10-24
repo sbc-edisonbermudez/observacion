@@ -63,10 +63,8 @@ def load_data():
 if 'df' not in st.session_state:
     st.session_state['df'] = load_data()  # Cargar datos al iniciar la aplicación
     
-
-st.table(st.session_state['df'])  # Mostrar la tabla
-num_columns = len(st.session_state['df'].columns)-1
 st.title("Observaciones")
+num_columns = len(st.session_state['df'].columns)-1
 st.html(f"""
 <p>
     <span style='font-family: "Roboto"; font-size: 20px; color: #025a7a; font-weight: 500;'>
@@ -91,6 +89,7 @@ st.html(f"""
     </span>
 </p>
 """)
+st.table(st.session_state['df'])  # Mostrar la tabla
 
 
 
