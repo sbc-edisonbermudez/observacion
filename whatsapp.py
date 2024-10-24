@@ -18,6 +18,11 @@ st.markdown(
     unsafe_allow_html=True
 )
 
+menu = st.sidebar.selectbox(
+    "Menú",
+    ("Inicio", "Acerca de", "Contacto", "Ayuda")
+)
+
 # Display the logo from a URL
 logo_url = "https://i1.sndcdn.com/avatars-TUVYyVNGNRk1TF07-p27gng-t500x500.jpg"
 st.image(logo_url, width=200)  # Adjust width as needed
