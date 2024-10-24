@@ -54,50 +54,21 @@ menu = st.sidebar.selectbox(
     ("Inicio", "Observaciones", "Acerca de", "Contacto", "Ayuda")
 )
 
-# Display the logo from a URL
-logo_url = "https://i1.sndcdn.com/avatars-TUVYyVNGNRk1TF07-p27gng-t500x500.jpg"
-st.image(logo_url, width=200)  # Adjust width as needed
-# Fetch data from the API
-data = requests.get("https://iph5309hnj.execute-api.us-east-1.amazonaws.com/dev/search-observations").json()
-st.title("Observaciones")
-# Extract only the "event" field from each notice
-events = [
-    {"event": notice["event"], "id": notice["id"], "observation": notice["observation"], "status": notice["status"]}
-    for notice in data["notices"]
-]
-# Convert the extracted events into a DataFrame
-df = pd.DataFrame(events)
-# Rename the "event" column to "aviso"
-df.rename(columns={"event": "Aviso","observation": "Observaciones",}, inplace=True)
-# Display the events in a table
-st.table(df)    
-
-
-# Definir el intervalo de recarga en segundos
-reload_interval = 5  # Cambia este valor al número de segundos deseado
-
-# Inicializar el temporizador si no está en el estado de sesión
-if 'last_updated' not in st.session_state:
-    st.session_state.last_updated = time.time()
+if st.button("Recargar datos"):
+    # Fetch data from the API
+    data = requests.get("https://iph5309hnj.execute-api.us-east-1.amazonaws.com/dev/search-observations").json()
     
-st.markdown(
-    """
-    <div id="div"></div>
-    <script>
-        function  initTimer(periodInSeconds) {
-            var end = Date.now() + periodInSeconds * 1000;
-
-
-            var x = window.setInterval(function() {
-                var timeLeft = Math.floor((end - Date.now()) / 1000);
-                console.log("test")
-                if(timeLeft < 0) { clearInterval(x); return; }
-
-            },200);
-        }
-
-       initTimer(10);
-    </script>
-    """,
-    unsafe_allow_html=True,
-)
+    st.title("Observaciones")
+    # Extract only the "event" field from each notice
+    events = [
+        {"event": notice["event"], "id": notice["id"], "observation": notice["observation"], "status": notice["status"]}
+        for notice in data["notices"]
+    ]
+    # Convert the extracted events into a DataFrame
+    df = pd.DataFrame(events)
+    # Rename the "event" column to "aviso"
+    df.rename(columns={"event": "Aviso", "observation": "Observaciones"}, inplace=True)
+    # Display the events in a table
+    st.table(df)
+else:
+    st.write("Presiona el botón para recargar los datos.")
