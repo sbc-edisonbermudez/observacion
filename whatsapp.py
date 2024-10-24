@@ -56,10 +56,10 @@ def load_data():
 
     # Reordenar las columnas según el nuevo nombre
     df = df.reindex(columns=["Placa", "Aviso", "Estado", "Fecha", "Nota"])
-    df.style.set_table_styles([{
-        'selector': 'th:nth-child(1), td:nth-child(1)',  # Ocultar la primera columna
-        'props': [('display', 'none')]
-    }])
+    # Contar el número de columnas
+    num_columns = len(df.columns)
+    st.write(f"El número de columnas es: {num_columns}")    
+    
     return df
 
 # Cargar los datos iniciales
@@ -67,10 +67,6 @@ if 'df' not in st.session_state:
     st.session_state['df'] = load_data()  # Cargar datos al iniciar la aplicación
     
 
-conteo_placas = session_state['df'].value_counts()
-st.html(
-    "<p><span style=''>"+conteo_placas+"</span>!</p>"
-)
 
 
 st.title("Observaciones")
