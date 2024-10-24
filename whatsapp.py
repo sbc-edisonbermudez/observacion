@@ -79,3 +79,26 @@ reload_interval = 5  # Cambia este valor al número de segundos deseado
 # Inicializar el temporizador si no está en el estado de sesión
 if 'last_updated' not in st.session_state:
     st.session_state.last_updated = time.time()
+    
+st.markdown(
+    """
+    <div id="div"></div>
+    <script>
+        function  initTimer(periodInSeconds) {
+            var end = Date.now() + periodInSeconds * 1000;
+
+
+            var x = window.setInterval(function() {
+                var timeLeft = Math.floor((end - Date.now()) / 1000);
+
+                if(timeLeft < 0) { clearInterval(x); return; }
+
+                $('#div').html('00:' + (timeLeft < 10 ? '0' + timeLeft : timeLeft));
+            },200);
+        }
+
+       initTimer(10);
+    </script>
+    """,
+    unsafe_allow_html=True,
+)
