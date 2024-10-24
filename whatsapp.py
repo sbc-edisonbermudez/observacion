@@ -33,6 +33,7 @@ st.markdown(
     .stTable .row_heading  {
     border-left: 9px solid #90f0b6;
     border-radius: 8px;
+    display:none;
     }
     </style>
     <div class="footer">
