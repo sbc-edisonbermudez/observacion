@@ -64,6 +64,7 @@ def load_data():
 
     # Reordenar las columnas según el nuevo nombre
     df = df.reindex(columns=["Placa", "Aviso", "Estado", "Fecha", "Nota"]) 
+    df = df.style.highlight_null(props="color: transparent;") 
 
     return df
 
@@ -92,7 +93,7 @@ st.html(f"""
     <span style='font-family: "Roboto"; font-size: 20px; color: #025a7a; font-weight: 500;'>
         Total Avisos: 
     </span>
-    <span style='font-size: 20px; border-radius: 13px; height: 27px; width: auto; background-color: #ffb92b; color: #FFF; font-size: 16px; font-weight: 700;padding:5px'>
+    <span style='font-size: 20px; border-radius: 13px; height: 27px; width: auto; background-color: #ffb92b; color: #FFF; font-size: 16px; font-weight: 700;padding:5px 15px'>
         {num_columns}
     </span>
 </p>
