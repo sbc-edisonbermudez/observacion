@@ -57,8 +57,8 @@ def load_data():
     # Reordenar las columnas según el nuevo nombre
     df = df.reindex(columns=["Placa", "Aviso", "Estado", "Fecha", "Nota"])
     # Contar el número de columnas
-    num_columns = len(df.columns)-1
-    st.write(f"El número de columnas es: {num_columns}")    
+    num_columns = len(df.columns)
+    st.write(f"El número de columnas es: {num_columns-1}")    
     
     return df
 
