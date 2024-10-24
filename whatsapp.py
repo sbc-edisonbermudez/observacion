@@ -5,6 +5,8 @@ import streamlit as st
 
 
 st.sidebar.image("https://i1.sndcdn.com/avatars-TUVYyVNGNRk1TF07-p27gng-t500x500.jpg", use_column_width=True)
+st.sidebar.[element_name]
+
 
 
 # Display the logo from a URL
