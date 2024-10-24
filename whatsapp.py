@@ -4,7 +4,7 @@ import pandas as pd
 import streamlit as st
 
 
-st.sidebar.image("https://i1.sndcdn.com/avatars-TUVYyVNGNRk1TF07-p27gng-t500x500.jpg", use_column_width=True)
+st.sidebar.image("https://liferaydev.subocol.com/image/layout_set_logo?img_id=190413&t=1729768369284", use_column_width=True)
 # Título de la aplicación
 st.title("Mi Aplicación con Menú Lateral")
 
