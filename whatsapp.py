@@ -67,7 +67,7 @@ if 'df' not in st.session_state:
 
 st.title("Observaciones")
 st.title("Taller: TODON AUTOS")
-st.table(st.session_state['df'])  # Mostrar la tabla
+st.table(st.session_state['df'], hide_index = True )  # Mostrar la tabla
 
 # Botón para recargar los datos
 if st.button("Recargar datos"):
