@@ -48,7 +48,13 @@ def load_data():
         for notice in data["notices"]
     ]
     df = pd.DataFrame(events)
-    df.rename(columns={"plate": "Placa", "observation": "Nota", "date": "Fecha", "date": "Fecha", "event": "Aviso", "status":"Estado"}, inplace=True)
+    df.rename(columns={"plate": "Placa", 
+                       "observation": "Nota", 
+                       "date": "Fecha", 
+                       "event": "Aviso", 
+                       "status": "Estado"}, inplace=True)
+
+    # Reordenar las columnas según el nuevo nombre
     df = df.reindex(columns=["Placa", "Aviso", "Estado", "Fecha", "Nota"])
 
     return df
