@@ -14,13 +14,29 @@ st.markdown(
         background-color: #0D4D64;
     }
     </style>
+    
+        .footer {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        text-align: center;
+        color: #85a4a7;
+        margin: 30px auto;
+        font-family: 'Montserrat', sans-serif !important;
+        font-size: 13px !important;
+    }
+    </style>
+    <div class="footer">
+        <p>Powered by Subocol</p>
+    </div>
     """,
     unsafe_allow_html=True
 )
 
 menu = st.sidebar.selectbox(
-    "Menú",
-    ("Inicio", "Acerca de", "Contacto", "Ayuda")
+    "",
+    ("Inicio", "Observaciones", "Acerca de", "Contacto", "Ayuda")
 )
 
 # Display the logo from a URL
@@ -48,3 +64,7 @@ df.rename(columns={"event": "Aviso","observation": "Observaciones",}, inplace=Tr
 # Display the events in a table
 st.table(df)
 
+st.title("")
+
+time.sleep(5)
+st.experimental_rerun()
