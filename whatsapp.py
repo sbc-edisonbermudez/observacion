@@ -56,7 +56,9 @@ def load_data():
 
     # Reordenar las columnas según el nuevo nombre
     df = df.reindex(columns=["Placa", "Aviso", "Estado", "Fecha", "Nota"])
-
+    st.dataframe(df)
+    st.dataframe(df.style.hide(axis="index"))
+    st.markdown(df.style.hide(axis="index").to_html(), unsafe_allow_html=True)
 
     return df
 
@@ -64,9 +66,6 @@ def load_data():
 if 'df' not in st.session_state:
     st.session_state['df'] = load_data()  # Cargar datos al iniciar la aplicación
 
-# Mostrar la tabla inicialmente
-st.dataframe(df.style.hide(axis="index"))
-st.markdown(df.style.hide(axis="index").to_html(), unsafe_allow_html=True)
 
 st.title("Observaciones")
 st.table(st.session_state['df'])  # Mostrar la tabla
