@@ -60,32 +60,26 @@ menu = st.sidebar.selectbox(
 logo_url = "https://i1.sndcdn.com/avatars-TUVYyVNGNRk1TF07-p27gng-t500x500.jpg"
 st.image(logo_url, width=200)  # Adjust width as needed
 
-# Rename the "event" column to "aviso"
-df.rename(columns={"event": "Aviso","observation": "Observaciones",}, inplace=True)
-
-
-# Observaciones
-st.title("Observaciones")
-elapsed_time = time.time() - st.session_state.start_time
-# Fetch data from the API
-data = requests.get("https://iph5309hnj.execute-api.us-east-1.amazonaws.com/dev/search-observations").json()
-# Extract only the "event" field from each notice
-events = [
-    {"event": notice["event"], "id": notice["id"], "observation": notice["observation"], "status": notice["status"]}
-    for notice in data["notices"]
-]
-# Display the events in a table
-st.table(df)
-# Convert the extracted events into a DataFrame
-df = pd.DataFrame(events)
-# Observaciones fin
 
 
 
 if elapsed_time > 3:
     st.session_state.start_time = time.time()  # Reiniciar el temporizador
+    # Fetch data from the API
+    data = requests.get("https://iph5309hnj.execute-api.us-east-1.amazonaws.com/dev/search-observations").json()
+    st.title("Observaciones")
+    # Extract only the "event" field from each notice
+    events = [
+        {"event": notice["event"], "id": notice["id"], "observation": notice["observation"], "status": notice["status"]}
+        for notice in data["notices"]
+    ]
+    # Convert the extracted events into a DataFrame
+    df = pd.DataFrame(events)
+    # Rename the "event" column to "aviso"
+    df.rename(columns={"event": "Aviso","observation": "Observaciones",}, inplace=True)
+    # Display the events in a table
+    st.table(df)    
 else:
     # Si no han pasado 3 segundos, mostrar el tiempo restante
     remaining_time = 3 - int(elapsed_time)
     st.write(f"Tiempo restante para la próxima recarga: {remaining_time} segundos")
-
