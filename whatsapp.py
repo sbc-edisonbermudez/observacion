@@ -58,6 +58,11 @@ menu = st.sidebar.selectbox(
 logo_url = "https://i1.sndcdn.com/avatars-TUVYyVNGNRk1TF07-p27gng-t500x500.jpg"
 st.image(logo_url, width=200)  # Adjust width as needed
 
+# Parámetro de recarga en segundos
+reload_interval = 5  # Cambia este valor al número de segundos deseado
+
+# Recargar automáticamente cada X segundos
+st_autorefresh(interval=reload_interval * 1000, key="data_refresh")
 
 st.session_state.start_time = time.time()  # Reiniciar el temporizador
 # Fetch data from the API
@@ -74,13 +79,3 @@ df = pd.DataFrame(events)
 df.rename(columns={"event": "Aviso","observation": "Observaciones",}, inplace=True)
 # Display the events in a table
 st.table(df)    
-
-
-st.set_page_config()
-
-ph = st.empty()
-N = 5*60
-for secs in range(N,0,-1):
-    mm, ss = secs//60, secs%60
-    ph.metric("Countdown", f"{mm:02d}:{ss:02d}")
-    time.sleep(1)
