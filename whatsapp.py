@@ -7,10 +7,10 @@ st.markdown(
     """
     <style>
     .reportview-container {
-        background: url("url_goes_here")
+        background: url("Orbikabackground.PNG")
     }
    .sidebar .sidebar-content {
-        background: url("url_goes_here")
+        background: url("Orbikabackground.PNG")
     }
     </style>
     """,
