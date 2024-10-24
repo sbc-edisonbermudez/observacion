@@ -4,8 +4,7 @@ import pandas as pd
 import streamlit as st
 import time
 
-if 'run_timer' not in st.session_state:
-    st.session_state.run_timer = True
+
 
 st.sidebar.image("https://liferaydev.subocol.com/image/layout_set_logo?img_id=190413&t=1729768369284", use_column_width=True)
 
@@ -31,6 +30,21 @@ st.markdown(
     <div class="footer">
         <p>Powered by <b>Subocol</b></p>
     </div>
+    """,
+    unsafe_allow_html=True
+)
+
+# Insertar JavaScript para recargar la página cada 60 segundos
+st.markdown(
+    """
+    <script>
+    function reloadPage() {
+        setTimeout(function() {
+            window.location.reload();
+        }, 5000); // 5000 ms = 5 segundos
+    }
+    reloadPage();
+    </script>
     """,
     unsafe_allow_html=True
 )
@@ -67,11 +81,3 @@ st.table(df)
 
 st.title("")
 
-# Verificar si el script ya ha corrido antes de intentar la recarga
-if not st.session_state.has_run:
-    # Primera vez que se corre el script
-    st.session_state.has_run = True
-else:
-    # Si ya ha corrido, hacer la recarga
-    time.sleep(60)  # Pausa de 60 segundos
-    st.experimental_rerun()  # Forzar la recarga de la app
