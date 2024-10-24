@@ -65,7 +65,12 @@ def load_data():
 # Cargar los datos iniciales
 if 'df' not in st.session_state:
     st.session_state['df'] = load_data()  # Cargar datos al iniciar la aplicación
+    
 
+conteo_placas = df['Placa'].value_counts()
+st.html(
+    "<p><span style=''>"+conteo_placas+"</span>!</p>"
+)
 
 
 st.title("Observaciones")
