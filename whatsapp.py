@@ -81,6 +81,8 @@ df.rename(columns={"event": "Aviso","observation": "Observaciones",}, inplace=Tr
 # Display the events in a table
 st.table(df)
 
+elapsed_time = time.time() - st.session_state.start_time
+
 
 if elapsed_time > 3:
     st.session_state.start_time = time.time()  # Reiniciar el temporizador
