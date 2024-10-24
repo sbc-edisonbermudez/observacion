@@ -36,9 +36,6 @@ menu = st.sidebar.selectbox(
     ("Observaciones", "Acerca de", "Contacto", "Ayuda")
 )
 
-# Mostrar el logo
-logo_url = "https://i1.sndcdn.com/avatars-TUVYyVNGNRk1TF07-p27gng-t500x500.jpg"
-st.image(logo_url, width=200)
 
 # Función para cargar los datos
 def load_data():
@@ -49,7 +46,7 @@ def load_data():
     ]
     df = pd.DataFrame(events)
     df.rename(columns={"plate": "Placa", 
-                       "observation": "Nota", 
+                       "observation": "Seguimiento", 
                        "date": "Fecha", 
                        "event": "Aviso", 
                        "status": "Estado"}, inplace=True)
@@ -91,7 +88,7 @@ st.html(f"""
 """)
 
 st.session_state['df'].index.name = 'Index_Name'
-st.table(st.session_state['df'].style.hide(axis="index"))  # Mostrar la tabla
+st.table(st.session_state['df'])  # Mostrar la tabla
 
 # Botón para recargar los datos
 if st.button("Recargar datos"):
