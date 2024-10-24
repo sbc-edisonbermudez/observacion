@@ -71,9 +71,9 @@ st.html(
     "<p><span style=''>Taller: TODON AUTOS</span>!</p>"
 )
 st.table(st.session_state['df'])  # Mostrar la tabla
-num_columns = len(st.session_state['df'].columns)
+num_columns = len(st.session_state['df'].columns)-1
 st.html(
-    "<p><span style=''>"+num_columns-1+"</span>!</p>"
+    "<p><span style=''>"+num_columns+"</span>!</p>"
 )
 
 # Botón para recargar los datos
