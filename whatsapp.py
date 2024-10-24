@@ -56,7 +56,6 @@ def load_data():
 
     # Reordenar las columnas según el nuevo nombre
     df = df.reindex(columns=["Placa", "Aviso", "Estado", "Fecha", "Nota"])
-    df.style.hide(axis="index")
     st.markdown(df.style.hide(axis="index").to_html(), unsafe_allow_html=True)
     return df
 
