@@ -4,7 +4,8 @@ import pandas as pd
 import streamlit as st
 import time
 
-
+if 'run_timer' not in st.session_state:
+    st.session_state.run_timer = True
 
 st.sidebar.image("https://liferaydev.subocol.com/image/layout_set_logo?img_id=190413&t=1729768369284", use_column_width=True)
 
@@ -23,12 +24,12 @@ st.markdown(
         text-align: center;
         color: #85a4a7;
         margin: 30px auto;
-        font-family: 'Montserrat', sans-serif !important;
+        font-family: 'Montserrat', system-ui !important;
         font-size: 13px !important;
     }
     </style>
     <div class="footer">
-        <p>Powered by Subocol</p>
+        <p>Powered by <b>Subocol</b></p>
     </div>
     """,
     unsafe_allow_html=True
@@ -66,5 +67,6 @@ st.table(df)
 
 st.title("")
 
-time.sleep(5)
-st.experimental_rerun()
+if st.session_state.run_timer:
+    time.sleep(5)  # Pausar por 60 segundos
+    st.experimental_rerun()  # Forzar recarga
