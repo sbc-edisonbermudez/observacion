@@ -55,10 +55,7 @@ def load_data():
                        "status": "Estado"}, inplace=True)
 
     # Reordenar las columnas según el nuevo nombre
-    df = df.reindex(columns=["Placa", "Aviso", "Estado", "Fecha", "Nota"])
-    # Contar el número de columnas
-    num_columns = len(df.columns)
-    st.write(f"El número de columnas es: {num_columns-1}")    
+    df = df.reindex(columns=["Placa", "Aviso", "Estado", "Fecha", "Nota"]) 
     
     return df
 
@@ -75,7 +72,9 @@ st.html(
 )
 st.table(st.session_state['df'])  # Mostrar la tabla
 num_columns = len(st.session_state['df'].columns)
-st.write(f"El número de columnas es: {num_columns-1}")  
+st.html(
+    "<p><span style=''>"+num_columns-1+"</span>!</p>"
+)
 
 # Botón para recargar los datos
 if st.button("Recargar datos"):
