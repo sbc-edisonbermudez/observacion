@@ -4,8 +4,8 @@ import pandas as pd
 import streamlit as st
 import time
 
-if 'last_ran' not in st.session_state:
-    st.session_state.last_ran = time.time()
+if 'start_time' not in st.session_state:
+    st.session_state.start_time = time.time()
 
 st.sidebar.image("https://liferaydev.subocol.com/image/layout_set_logo?img_id=190413&t=1729768369284", use_column_width=True)
 
@@ -82,8 +82,10 @@ df.rename(columns={"event": "Aviso","observation": "Observaciones",}, inplace=Tr
 st.table(df)
 
 
-# Verificar si han pasado 60 segundos desde la última recarga
-if time.time() - st.session_state.last_ran > 3:
-    st.session_state.last_ran = time.time()  # Actualizar el tiempo de última ejecución
-    data = requests.get("https://iph5309hnj.execute-api.us-east-1.amazonaws.com/dev/search-observations").json()
-    st.title("Observaciones")
+if elapsed_time > 3:
+    st.session_state.start_time = time.time()  # Reiniciar el temporizador
+else:
+    # Si no han pasado 3 segundos, mostrar el tiempo restante
+    remaining_time = 3 - int(elapsed_time)
+    st.write(f"Tiempo restante para la próxima recarga: {remaining_time} segundos")
+
