@@ -127,7 +127,7 @@ if st.button("Recargar datos"):
 
 
           
-with st.sidebar.popover("Chatea con ASTRA"):
+with st.sidebar.popover("ASTRA"):
   
     ############################ CHAT ##################################
 
